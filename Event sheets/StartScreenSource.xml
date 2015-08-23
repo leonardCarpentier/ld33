@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2eventsheet>
+    <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
+    <name>StartScreenSource</name>
+    <events>
+        <event-block sid="5028868838264544">
+            <conditions>
+                <condition id="1" name="On any click" sid="5116817847902063" type="Mouse" />
+            </conditions>
+            <actions>
+                <action id="0" name="Play" sid="6058618496622646" type="audiocontroller">
+                    <param id="0" name="Audio file">click</param>
+                    <param id="2" name="Loop">0</param>
+                    <param id="3" name="Volume">0</param>
+                    <param id="1" name="Tag (optional)">&quot;click&quot;</param>
+                </action>
+            </actions>
+        </event-block>
+        <event-block sid="1382423124301544">
+            <conditions>
+                <condition id="0" name="On ended" sid="5695188330968781" type="audiocontroller">
+                    <param id="0" name="Tag">&quot;click&quot;</param>
+                </condition>
+            </conditions>
+            <actions>
+                <action id="-2" name="Go to layout" sid="8448090152102522" type="System">
+                    <param id="0" name="Layout">GameScene</param>
+                </action>
+            </actions>
+        </event-block>
+    </events>
+</c2eventsheet>

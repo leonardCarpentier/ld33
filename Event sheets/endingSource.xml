@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2eventsheet>
+    <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
+    <name>endingSource</name>
+    <events>
+        <event-block sid="5369678829987472">
+            <conditions>
+                <condition id="-2" name="On start of layout" sid="2778498797293873" type="System" />
+            </conditions>
+            <actions>
+                <action id="0" name="Set text" sid="2394983873333077" type="ScoreText">
+                    <param id="0" name="Text">&quot;You scored &quot; &amp; floor(score)&amp;&quot; points by stopping &quot;&amp;soulStopped&amp;&quot; souls.&quot;</param>
+                </action>
+                <action id="0" name="Play" sid="3439316356140998" type="audiocontroller">
+                    <param id="0" name="Audio file">winjingle</param>
+                    <param id="2" name="Loop">0</param>
+                    <param id="3" name="Volume">0</param>
+                    <param id="1" name="Tag (optional)">&quot;&quot;</param>
+                </action>
+            </actions>
+        </event-block>
+    </events>
+</c2eventsheet>

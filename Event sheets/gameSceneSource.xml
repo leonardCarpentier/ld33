@@ -1,0 +1,838 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2eventsheet>
+    <!--All the 'name' attributes are ignored by Construct 2 - they are there for readability only.-->
+    <name>gameSceneSource</name>
+    <events>
+        <variable constant="1" name="WAVESIZE" sid="3295812636828468" static="0" type="number">15</variable>
+        <variable constant="0" name="score" sid="7913752355928371" static="0" type="number">0</variable>
+        <variable constant="0" name="soulStopped" sid="8406470664520374" static="0" type="number">0</variable>
+        <variable constant="0" name="soulCount" sid="3699465726624239" static="0" type="number">0</variable>
+        <variable constant="0" name="level" sid="5719462128207075" static="0" type="number">1</variable>
+        <variable constant="0" name="rand" sid="5757200973037877" static="0" type="number">0</variable>
+        <variable constant="0" name="isDogMoving" sid="1845210920447617" static="0" type="number">0</variable>
+        <variable constant="0" name="fireballAnimationPlaying" sid="1161520006233547" static="0" type="number">0</variable>
+        <event-group description="" sid="4942399051498279" title="Init">
+            <sub-events>
+                <variable constant="0" name="x" sid="731334526913245" static="0" type="number">-1</variable>
+                <variable constant="0" name="y" sid="9175204011441432" static="0" type="number">0</variable>
+                <event-block sid="2541683073231325">
+                    <conditions>
+                        <condition id="-2" name="On start of layout" sid="6532014632189281" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="1027785257764419" type="soul" />
+                        <action id="-9" name="Destroy" sid="9800691854996938" type="bullet" />
+                        <action id="-10" name="Set value" sid="8161033952774358" type="head1">
+                            <param id="0" name="Instance variable">deltaRot</param>
+                            <param id="1" name="Value">head1.Angle</param>
+                        </action>
+                        <action id="-10" name="Set value" sid="3466901179700917" type="head2">
+                            <param id="0" name="Instance variable">DeltaRot</param>
+                            <param id="1" name="Value">head2.Angle</param>
+                        </action>
+                        <action id="2" name="Stop" sid="5062037537023019" type="cerberusBody" />
+                        <action id="0" name="Set text" sid="2295059767615494" type="scoretxt">
+                            <param id="0" name="Text">&quot;Score : 0&quot;</param>
+                        </action>
+                        <action id="0" name="Set text" sid="5282059711341847" type="remainingSouls">
+                            <param id="0" name="Text">&quot;Remaining Souls : &quot;&amp;((3*WAVESIZE)/min(level,3))-soulCount</param>
+                        </action>
+                        <action id="2" name="Stop" sid="9470722524027669" type="Sprite2" />
+                    </actions>
+                    <sub-events>
+                        <event-block sid="5655520948208392">
+                            <conditions>
+                                <condition id="-10" name="For" sid="4345346311674799" type="System">
+                                    <param id="0" name="Name">&quot;CreatinBackground&quot;</param>
+                                    <param id="1" name="Start index">0</param>
+                                    <param id="2" name="End index">ceil(500/tileBackground.Width)+5</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="9292796776072007">
+                                    <conditions>
+                                        <condition id="-10" name="For" sid="4423553084829022" type="System">
+                                            <param id="0" name="Name">&quot;colums&quot;</param>
+                                            <param id="1" name="Start index">0</param>
+                                            <param id="2" name="End index">ceil(500/tileBackground.Height)+5</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-3" name="Create object" sid="6668866682376564" type="System">
+                                            <param id="0" name="Object to create">tileBackground</param>
+                                            <param id="1" name="Layer">0</param>
+                                            <param id="2" name="X">loopindex(&quot;colums&quot;)*(tileBackground.Width-2)</param>
+                                            <param id="3" name="Y">loopindex(&quot;CreatinBackground&quot;)*(tileBackground.Height-2)</param>
+                                        </action>
+                                        <action id="-25" name="Move to bottom" sid="4849807112122028" type="tileBackground" />
+                                        <action id="5" name="Set frame" sid="1785098061834142" type="tileBackground">
+                                            <param id="0" name="Frame number">random(tileBackground.AnimationFrameCount+1)</param>
+                                        </action>
+                                        <action id="2" name="Stop" sid="4771278220968671" type="tileBackground" />
+                                        <action id="-8" name="Set angle" sid="8128660327986708" type="tileBackground">
+                                            <param id="0" name="Angle">(floor(random(4))+1)*90</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="9709034835033889" title="OnTickFrame">
+            <sub-events>
+                <event-block sid="9787854860866609">
+                    <conditions>
+                        <condition id="-1" name="Every tick" sid="2959222271987695" type="System" />
+                    </conditions>
+                    <actions>
+                        <action id="-8" name="Set angle" sid="1740424406400705" type="cerberusBody">
+                            <param id="0" name="Angle">angle(cerberusBody.X, cerberusBody.Y, Mouse.X, Mouse.Y)+90</param>
+                        </action>
+                        <action id="-8" name="Set angle" sid="453274438624994" type="head1">
+                            <param id="0" name="Angle">cerberusBody.Angle+180+head1.deltaRot</param>
+                        </action>
+                        <action id="-8" name="Set angle" sid="187683142467518" type="head2">
+                            <param id="0" name="Angle">cerberusBody.Angle+180+head2.DeltaRot</param>
+                        </action>
+                        <action id="-8" name="Set angle" sid="4066662751622122" type="head3">
+                            <param id="0" name="Angle">cerberusBody.Angle+180</param>
+                        </action>
+                        <action id="-3" name="Set position" sid="7491537494782018" type="head1">
+                            <param id="0" name="X">cerberusBody.X</param>
+                            <param id="1" name="Y">cerberusBody.Y</param>
+                        </action>
+                        <action id="-4" name="Set position to another object" sid="6867995348176946" type="head2">
+                            <param id="0" name="Object">cerberusBody</param>
+                            <param id="1" name="Image point (optional)">0</param>
+                        </action>
+                        <action id="-4" name="Set position to another object" sid="8370723966789679" type="head3">
+                            <param id="0" name="Object">cerberusBody</param>
+                            <param id="1" name="Image point (optional)">0</param>
+                        </action>
+                        <action id="0" name="Set text" sid="1681213850532921" type="scoretxt">
+                            <param id="0" name="Text">&quot;Score : &quot;&amp;floor(score)</param>
+                        </action>
+                        <action id="0" name="Set text" sid="490239404118124" type="remainingSouls">
+                            <param id="0" name="Text">&quot;Remaining Souls : &quot;&amp;((3*WAVESIZE)/min(level,3))-soulCount</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="8303895379211314">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="6878507966160839" type="System">
+                                    <param id="0" name="First value">cerberusBody.Y</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">cerberusBody.lastposY</param>
+                                </condition>
+                                <condition id="-8" name="Compare two values" sid="9438834994751243" type="System">
+                                    <param id="0" name="First value">cerberusBody.Y</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">cerberusBody.lastposY</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="2" name="Stop" sid="8945340320642398" type="cerberusBody" />
+                                <action id="-9" name="Set value" sid="7607535601078417" type="System">
+                                    <param id="0" name="Variable">isDogMoving</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                                <action id="5" name="Set frame" sid="6920733065935701" type="cerberusBody">
+                                    <param id="0" name="Frame number">0</param>
+                                </action>
+                                <action behavior="Pathfinding" id="4" name="Regenerate obstacle map" sid="5099207854172241" type="soul" />
+                            </actions>
+                        </event-block>
+                        <event-block sid="6263051298494756">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="321657700471923" type="System">
+                                    <param id="0" name="First value">cerberusBody.X</param>
+                                    <param id="1" name="Comparison">1</param>
+                                    <param id="2" name="Second value">cerberusBody.lastposX</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Set value" sid="1912749494848316" type="cerberusBody">
+                                    <param id="0" name="Instance variable">lastposX</param>
+                                    <param id="1" name="Value">cerberusBody.X</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="6657457434565904">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="1913917279285462" type="System">
+                                    <param id="0" name="First value">cerberusBody.y</param>
+                                    <param id="1" name="Comparison">1</param>
+                                    <param id="2" name="Second value">cerberusBody.lastposY</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Set value" sid="9278741212404594" type="cerberusBody">
+                                    <param id="0" name="Instance variable">lastposY</param>
+                                    <param id="1" name="Value">cerberusBody.Y</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="6876022107010729">
+                            <conditions>
+                                <condition id="-8" name="Is boolean instance variable set" sid="7972775899714999" type="boat">
+                                    <param id="0" name="Instance variable">moving</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-23" name="Move at angle" sid="7188083750493356" type="boat">
+                                    <param id="0" name="Angle">angle(boat.X, boat.Y, boat1spawner.X, boat1spawner.Y)</param>
+                                    <param id="1" name="Distance">100*dt</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="1840390760408328">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="2372858966860282" type="System">
+                                            <param id="0" name="First value">distance(boat.X, boat.Y, boat1spawner.X, boat1spawner.Y)</param>
+                                            <param id="1" name="Comparison">3</param>
+                                            <param id="2" name="Second value">100*dt</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-3" name="Set position" sid="7761109143895778" type="boat">
+                                            <param id="0" name="X">boat1spawner.X</param>
+                                            <param id="1" name="Y">boat1spawner.Y</param>
+                                        </action>
+                                        <action id="-9" name="Destroy" sid="2506042016323341" type="boat1spawner" />
+                                        <action id="-13" name="Set boolean" sid="3852143279758196" type="boat">
+                                            <param id="0" name="Instance variable">moving</param>
+                                            <param id="1" name="Value">0</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="2363249188307769">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="8050607494216577" type="System">
+                                    <param id="0" name="First value">soulCount</param>
+                                    <param id="1" name="Comparison">5</param>
+                                    <param id="2" name="Second value">WAVESIZE</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Add to" sid="1888096599137643" type="System">
+                                    <param id="0" name="Variable">level</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="2079515950716533" type="System">
+                                    <param id="0" name="Variable">soulCount</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                            <sub-events>
+                                <event-block sid="2196322401550044">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="1681396767704872" type="System">
+                                            <param id="0" name="First value">level</param>
+                                            <param id="1" name="Comparison">0</param>
+                                            <param id="2" name="Second value">2</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-13" name="Set boolean" sid="2466109166659323" type="boat">
+                                            <param id="0" name="Instance variable">moving</param>
+                                            <param id="1" name="Value">1</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="9095660961423207">
+                                    <conditions>
+                                        <condition id="-14" name="Compare variable" sid="2756423117730756" type="System">
+                                            <param id="0" name="Variable">level</param>
+                                            <param id="1" name="Comparison">5</param>
+                                            <param id="2" name="Value">4</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action id="-25" name="Go to layout (by name)" sid="9188978123417542" type="System">
+                                            <param id="0" name="Layout">&quot;ending&quot;</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="4540430860580432">
+                    <conditions>
+                        <condition id="6" name="On object clicked" sid="5635084916639712" type="Mouse">
+                            <param id="0" name="Mouse button">0</param>
+                            <param id="1" name="Click type">0</param>
+                            <param id="2" name="Object clicked">Sprite2</param>
+                        </condition>
+                    </conditions>
+                    <actions />
+                    <sub-events>
+                        <variable constant="0" name="justToggled" sid="2931596117965638" static="0" type="number">0</variable>
+                        <event-block sid="8235918473098199">
+                            <conditions>
+                                <condition id="3" name="Compare frame" sid="835326949942621" type="Sprite2">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Number">1</param>
+                                </condition>
+                                <condition id="-14" name="Compare variable" sid="1916462015824649" type="System">
+                                    <param id="0" name="Variable">justToggled</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="5" name="Set frame" sid="1229325661449497" type="Sprite2">
+                                    <param id="0" name="Frame number">0</param>
+                                </action>
+                                <action id="2" name="Stop" sid="9032479131386691" type="Sprite2" />
+                                <action id="8" name="Set silent" sid="2174098104373295" type="audiocontroller">
+                                    <param id="0" name="Mode">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="380628467625494" type="System">
+                                    <param id="0" name="Variable">justToggled</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="2205876378247145">
+                            <conditions>
+                                <condition id="3" name="Compare frame" sid="5681905701770484" type="Sprite2">
+                                    <param id="0" name="Comparison">0</param>
+                                    <param id="1" name="Number">0</param>
+                                </condition>
+                                <condition id="-14" name="Compare variable" sid="485633287402141" type="System">
+                                    <param id="0" name="Variable">justToggled</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Play" sid="5015646689985615" type="audiocontroller">
+                                    <param id="0" name="Audio file">winjingle</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">0</param>
+                                    <param id="1" name="Tag (optional)">&quot;&quot;</param>
+                                </action>
+                                <action id="5" name="Set frame" sid="5041896111712474" type="Sprite2">
+                                    <param id="0" name="Frame number">1</param>
+                                </action>
+                                <action id="2" name="Stop" sid="2096230534482108" type="Sprite2" />
+                                <action id="8" name="Set silent" sid="6823930505464573" type="audiocontroller">
+                                    <param id="0" name="Mode">0</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="7972376116204945" type="System">
+                                    <param id="0" name="Variable">justToggled</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="3710676789162138">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="9221341798414102" type="System">
+                                    <param id="0" name="Variable">justToggled</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-9" name="Set value" sid="3256954641942125" type="System">
+                                    <param id="0" name="Variable">justToggled</param>
+                                    <param id="1" name="Value">0</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="2400466203691669" title="Controls">
+            <sub-events>
+                <variable constant="0" name="cerberusSpeed" sid="5145155310484478" static="0" type="number">180</variable>
+                <variable constant="0" name="soulSpeed" sid="2610407340039888" static="0" type="number">50</variable>
+                <event-block sid="5392228116126655">
+                    <conditions>
+                        <condition id="4" name="On finished" sid="5340665560947973" type="head3">
+                            <param id="0" name="Animation">&quot;default&quot;</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="8178601081310585" type="System">
+                            <param id="0" name="Variable">fireballAnimationPlaying</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">1</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="4470243882653974" type="System">
+                            <param id="0" name="Variable">fireballAnimationPlaying</param>
+                            <param id="1" name="Value">0</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="4395635151461918">
+                    <conditions>
+                        <condition id="2" name="Mouse button is down" sid="8344699466851069" type="Mouse">
+                            <param id="0" name="Mouse button">0</param>
+                        </condition>
+                        <condition id="-8" name="Compare two values" sid="1612557224242806" type="System">
+                            <param id="0" name="First value">distance(cerberusBody.X, cerberusBody.Y, Mouse.X, Mouse.Y)</param>
+                            <param id="1" name="Comparison">4</param>
+                            <param id="2" name="Second value">cerberusSpeed*dt</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-23" name="Move at angle" sid="6217097598286338" type="cerberusBody">
+                            <param id="0" name="Angle">angle(cerberusBody.X, cerberusBody.Y, Mouse.X, Mouse.Y)</param>
+                            <param id="1" name="Distance">cerberusSpeed*dt</param>
+                        </action>
+                        <action id="-22" name="Set angle toward position" sid="3609957579776862" type="cerberusBody">
+                            <param id="0" name="X">Mouse.X</param>
+                            <param id="1" name="Y">Mouse.Y</param>
+                        </action>
+                        <action id="-18" name="Rotate clockwise" sid="6458140409606113" type="cerberusBody">
+                            <param id="0" name="Degrees">90</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="4604603394553028">
+                            <conditions>
+                                <condition id="-14" name="Compare variable" sid="1587835133531499" type="System">
+                                    <param id="0" name="Variable">isDogMoving</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Value">0</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="3" name="Start" sid="1276558364801055" type="cerberusBody">
+                                    <param id="0" name="From">1</param>
+                                </action>
+                                <action id="-9" name="Set value" sid="7396075354082996" type="System">
+                                    <param id="0" name="Variable">isDogMoving</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <comment>Attacks</comment>
+                <comment>Main attack</comment>
+                <event-block sid="2387746737932504">
+                    <conditions>
+                        <condition id="4" name="On key code pressed" sid="8060014466163171" type="Keyboard">
+                            <param id="0" name="Keycode">70</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="3" name="Start" sid="1788682480304832" type="head1">
+                            <param id="0" name="From">1</param>
+                        </action>
+                        <action id="0" name="Play" sid="8147975796488325" type="audiocontroller">
+                            <param id="0" name="Audio file">bite1</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">-15</param>
+                            <param id="1" name="Tag (optional)">&quot;&quot;</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="9827909600751069">
+                            <conditions>
+                                <condition id="1" name="Is overlapping another object" sid="1225125697884558" type="head1">
+                                    <param id="0" name="Object">soul</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Add to" sid="6894375376100032" type="System">
+                                    <param id="0" name="Variable">score</param>
+                                    <param id="1" name="Value">soul.Y/5</param>
+                                </action>
+                                <action id="-9" name="Destroy" sid="635196314985904" type="soul" />
+                                <action id="-10" name="Add to" sid="2624395868535503" type="System">
+                                    <param id="0" name="Variable">soulCount</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="0" name="Play" sid="931002444406717" type="audiocontroller">
+                                    <param id="0" name="Audio file">bite1</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">0</param>
+                                    <param id="1" name="Tag (optional)">&quot;&quot;</param>
+                                </action>
+                                <action id="-10" name="Add to" sid="9620246698817306" type="System">
+                                    <param id="0" name="Variable">soulStopped</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="9155847576905553">
+                    <conditions>
+                        <condition id="4" name="On key code pressed" sid="6774296455376482" type="Keyboard">
+                            <param id="0" name="Keycode">72</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="3" name="Start" sid="4916464192545937" type="head2">
+                            <param id="0" name="From">1</param>
+                        </action>
+                        <action id="0" name="Play" sid="8666233541305974" type="audiocontroller">
+                            <param id="0" name="Audio file">bite1</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">-15</param>
+                            <param id="1" name="Tag (optional)">&quot;&quot;</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="8168945486052145">
+                            <conditions>
+                                <condition id="1" name="Is overlapping another object" sid="7601985956177017" type="head2">
+                                    <param id="0" name="Object">soul</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action id="-10" name="Add to" sid="3765741876912874" type="System">
+                                    <param id="0" name="Variable">score</param>
+                                    <param id="1" name="Value">soul.Y/5</param>
+                                </action>
+                                <action id="-9" name="Destroy" sid="3846234071376887" type="soul" />
+                                <action id="-10" name="Add to" sid="6595293494800276" type="System">
+                                    <param id="0" name="Variable">soulCount</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                                <action id="0" name="Play" sid="8540178895386727" type="audiocontroller">
+                                    <param id="0" name="Audio file">bite1</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">0</param>
+                                    <param id="1" name="Tag (optional)">&quot;&quot;</param>
+                                </action>
+                                <action id="-10" name="Add to" sid="1160016878257809" type="System">
+                                    <param id="0" name="Variable">soulStopped</param>
+                                    <param id="1" name="Value">1</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="8645982593569263">
+                    <conditions>
+                        <condition id="4" name="On key code pressed" sid="4542483455474951" type="Keyboard">
+                            <param id="0" name="Keycode">71</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="268590440015286" type="System">
+                            <param id="0" name="Variable">fireballAnimationPlaying</param>
+                            <param id="1" name="Comparison">0</param>
+                            <param id="2" name="Value">0</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Set value" sid="6895090255787506" type="System">
+                            <param id="0" name="Variable">fireballAnimationPlaying</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="-3" name="Create object" sid="8151921966863627" type="System">
+                            <param id="0" name="Object to create">bullet</param>
+                            <param id="1" name="Layer">0</param>
+                            <param id="2" name="X">head3.X</param>
+                            <param id="3" name="Y">head3.y</param>
+                        </action>
+                        <action behavior="Bullet" id="3" name="Set angle of motion" sid="3765185103752491" type="bullet">
+                            <param id="0" name="Angle">cerberusBody.Angle-90</param>
+                        </action>
+                        <action id="-29" name="Move to object" sid="9184457084176545" type="bullet">
+                            <param id="0" name="Where">1</param>
+                            <param id="1" name="Object">head3</param>
+                        </action>
+                        <action id="4" name="Set animation" sid="4968050647404303" type="head3">
+                            <param id="0" name="Animation">&quot;default&quot;</param>
+                            <param id="1" name="From">1</param>
+                        </action>
+                        <action id="3" name="Start" sid="7197820263664344" type="head3">
+                            <param id="0" name="From">0</param>
+                        </action>
+                        <action id="0" name="Play" sid="8204917810317677" type="audiocontroller">
+                            <param id="0" name="Audio file">bite1</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">-15</param>
+                            <param id="1" name="Tag (optional)">&quot;&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="6111827325539819">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="729763862144539" type="bullet">
+                            <param id="0" name="Object">soul</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="7893252027078015" type="bullet" />
+                        <action id="-10" name="Add to" sid="4261946572392985" type="System">
+                            <param id="0" name="Variable">score</param>
+                            <param id="1" name="Value">(soul.Y/5)*0.8</param>
+                        </action>
+                        <action id="-9" name="Destroy" sid="5083005912029916" type="soul" />
+                        <action id="-10" name="Add to" sid="4844829049702938" type="System">
+                            <param id="0" name="Variable">soulCount</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="0" name="Play" sid="6365024682015624" type="audiocontroller">
+                            <param id="0" name="Audio file">explosion</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">0</param>
+                            <param id="1" name="Tag (optional)">&quot;&quot;</param>
+                        </action>
+                        <action id="-10" name="Add to" sid="4051226393209473" type="System">
+                            <param id="0" name="Variable">soulStopped</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="6231476442380922">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="3621180701291788" type="bullet">
+                            <param id="0" name="Object">ruins</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="5910689311957244" type="bullet" />
+                    </actions>
+                    <sub-events>
+                        <event-block sid="8737306445851306">
+                            <conditions>
+                                <condition id="-3" name="Is on-screen" sid="636844499562264" type="bullet" />
+                            </conditions>
+                            <actions>
+                                <action id="0" name="Play" sid="5514658605848455" type="audiocontroller">
+                                    <param id="0" name="Audio file">explosion</param>
+                                    <param id="2" name="Loop">0</param>
+                                    <param id="3" name="Volume">-10</param>
+                                    <param id="1" name="Tag (optional)">&quot;&quot;</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-group description="" sid="2411564203991227" title="souls">
+            <sub-events>
+                <comment>Spawner</comment>
+                <event-block sid="439636742461543">
+                    <conditions>
+                        <condition id="-6" name="Every X seconds" sid="5317190920648577" type="System">
+                            <param id="0" name="Interval (seconds)">random((5-level)*10)/10</param>
+                        </condition>
+                        <condition id="-14" name="Compare variable" sid="6016879342878337" type="System">
+                            <param id="0" name="Variable">soulCount</param>
+                            <param id="1" name="Comparison">2</param>
+                            <param id="2" name="Value">WAVESIZE</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-3" name="Create object" sid="3882820232875444" type="System">
+                            <param id="0" name="Object to create">soul</param>
+                            <param id="1" name="Layer">0</param>
+                            <param id="2" name="X">random(500)</param>
+                            <param id="3" name="Y">550</param>
+                        </action>
+                        <action id="-9" name="Set value" sid="4657646657208937" type="System">
+                            <param id="0" name="Variable">rand</param>
+                            <param id="1" name="Value">random(100)/100</param>
+                        </action>
+                        <action id="-7" name="Set size" sid="1984103448889679" type="soul">
+                            <param id="0" name="Width">32</param>
+                            <param id="1" name="Height">32</param>
+                        </action>
+                        <action id="3" name="Start" sid="4025750492095727" type="soul">
+                            <param id="0" name="From">1</param>
+                        </action>
+                    </actions>
+                    <sub-events>
+                        <event-block sid="1856215661512297">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="9251324960162827" type="System">
+                                    <param id="0" name="First value">level</param>
+                                    <param id="1" name="Comparison">3</param>
+                                    <param id="2" name="Second value">1</param>
+                                </condition>
+                            </conditions>
+                            <actions>
+                                <action behavior="Pathfinding" id="0" name="Find path" sid="5677012846283102" type="soul">
+                                    <param id="0" name="X">bridge.X</param>
+                                    <param id="1" name="Y">bridge.Y</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="9113854138344995" type="soul">
+                                    <param id="0" name="Instance variable">targetX</param>
+                                    <param id="1" name="Value">bridge.X</param>
+                                </action>
+                                <action id="-10" name="Set value" sid="3025866050739688" type="soul">
+                                    <param id="0" name="Instance variable">targetY</param>
+                                    <param id="1" name="Value">bridge.Y</param>
+                                </action>
+                            </actions>
+                        </event-block>
+                        <event-block sid="8485971691433881">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="5562760438258754" type="System">
+                                    <param id="0" name="First value">level</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">2</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="3949895834744024">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="9077430865095363" type="System">
+                                            <param id="0" name="First value">rand</param>
+                                            <param id="1" name="Comparison">5</param>
+                                            <param id="2" name="Second value">0.5</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action behavior="Pathfinding" id="0" name="Find path" sid="9568179950360312" type="soul">
+                                            <param id="0" name="X">boat.X</param>
+                                            <param id="1" name="Y">boat.Y</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="4426888229019746" type="soul">
+                                            <param id="0" name="Instance variable">targetX</param>
+                                            <param id="1" name="Value">boat.X</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="6043512355163189" type="soul">
+                                            <param id="0" name="Instance variable">targetY</param>
+                                            <param id="1" name="Value">boat.Y</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="7195056542433726">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="6123253774349878" type="System">
+                                            <param id="0" name="First value">rand</param>
+                                            <param id="1" name="Comparison">2</param>
+                                            <param id="2" name="Second value">0.5</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action behavior="Pathfinding" id="0" name="Find path" sid="3773268485767343" type="soul">
+                                            <param id="0" name="X">bridge.X</param>
+                                            <param id="1" name="Y">bridge.y</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="6614472632683792" type="soul">
+                                            <param id="0" name="Instance variable">targetX</param>
+                                            <param id="1" name="Value">bridge.X</param>
+                                        </action>
+                                        <action id="-10" name="Set value" sid="2552925175687083" type="soul">
+                                            <param id="0" name="Instance variable">targetY</param>
+                                            <param id="1" name="Value">bridge.Y</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                        <event-block sid="8445487377169367">
+                            <conditions>
+                                <condition id="-8" name="Compare two values" sid="6882286851861727" type="System">
+                                    <param id="0" name="First value">level</param>
+                                    <param id="1" name="Comparison">0</param>
+                                    <param id="2" name="Second value">3</param>
+                                </condition>
+                            </conditions>
+                            <actions />
+                            <sub-events>
+                                <event-block sid="9321680908894194">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="8337365293573148" type="System">
+                                            <param id="0" name="First value">rand</param>
+                                            <param id="1" name="Comparison">5</param>
+                                            <param id="2" name="Second value">0.5</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action behavior="Pathfinding" id="0" name="Find path" sid="5901670500222328" type="soul">
+                                            <param id="0" name="X">boat.X</param>
+                                            <param id="1" name="Y">boat.Y</param>
+                                        </action>
+                                        <action behavior="Pathfinding" id="7" name="Set max speed" sid="8503278244796724" type="soul">
+                                            <param id="0" name="Speed">soul.Pathfinding.MaxSpeed+10</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                                <event-block sid="3112888307879578">
+                                    <conditions>
+                                        <condition id="-8" name="Compare two values" sid="4980983063646133" type="System">
+                                            <param id="0" name="First value">rand</param>
+                                            <param id="1" name="Comparison">2</param>
+                                            <param id="2" name="Second value">0.5</param>
+                                        </condition>
+                                    </conditions>
+                                    <actions>
+                                        <action behavior="Pathfinding" id="0" name="Find path" sid="1820674008358144" type="soul">
+                                            <param id="0" name="X">bridge.X</param>
+                                            <param id="1" name="Y">bridge.y</param>
+                                        </action>
+                                        <action behavior="Pathfinding" id="7" name="Set max speed" sid="3031803233389795" type="soul">
+                                            <param id="0" name="Speed">soul.Pathfinding.MaxSpeed+10</param>
+                                        </action>
+                                    </actions>
+                                </event-block>
+                            </sub-events>
+                        </event-block>
+                    </sub-events>
+                </event-block>
+                <event-block sid="6802758146034621">
+                    <conditions>
+                        <condition behavior="Pathfinding" id="0" name="On path found" sid="5951343538367822" type="soul" />
+                    </conditions>
+                    <actions>
+                        <action behavior="Pathfinding" id="1" name="Move along path" sid="1820838706774569" type="soul" />
+                    </actions>
+                </event-block>
+                <event-block sid="8209368905265506">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="59682990884493" type="soul">
+                            <param id="0" name="Object">boat</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="7994898674028269" type="soul" />
+                        <action id="-10" name="Add to" sid="2078539021040012" type="System">
+                            <param id="0" name="Variable">soulCount</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="0" name="Play" sid="6811796127316521" type="audiocontroller">
+                            <param id="0" name="Audio file">soulwin</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">0</param>
+                            <param id="1" name="Tag (optional)">&quot;&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+                <event-block sid="4857821669402434">
+                    <conditions>
+                        <condition id="0" name="On collision with another object" sid="1929344914894492" type="soul">
+                            <param id="0" name="Object">bridge</param>
+                        </condition>
+                    </conditions>
+                    <actions>
+                        <action id="-9" name="Destroy" sid="2235066579556053" type="soul" />
+                        <action id="-10" name="Add to" sid="9344540456944068" type="System">
+                            <param id="0" name="Variable">soulCount</param>
+                            <param id="1" name="Value">1</param>
+                        </action>
+                        <action id="0" name="Play" sid="960481442741399" type="audiocontroller">
+                            <param id="0" name="Audio file">soulwin</param>
+                            <param id="2" name="Loop">0</param>
+                            <param id="3" name="Volume">0</param>
+                            <param id="1" name="Tag (optional)">&quot;&quot;</param>
+                        </action>
+                    </actions>
+                </event-block>
+            </sub-events>
+        </event-group>
+        <event-block sid="1553994380282482">
+            <conditions />
+            <actions />
+        </event-block>
+    </events>
+</c2eventsheet>

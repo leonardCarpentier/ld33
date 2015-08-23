@@ -1,0 +1,725 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<c2project>
+    <name>Helldog</name>
+    <description></description>
+    <version>1.0.0.0</version>
+    <author>Leonard Carpentier</author>
+    <author-email>leonard.carpentier@gmail.com</author-email>
+    <author-website>http://twitter.com/_lcarpentier</author-website>
+    <app-id>com.mycompany.myapp</app-id>
+    <unique-id>1q9dmcc21jur</unique-id>
+    <saved-with-version>21202</saved-with-version>
+    <used-plugins>
+        <plugin author="Scirra" id="Audio" version="1">Audio</plugin>
+        <plugin author="Scirra" id="Keyboard" version="1">Keyboard</plugin>
+        <plugin author="Scirra" id="Mouse" version="1">Mouse</plugin>
+        <plugin author="Scirra" id="Sprite" version="1">Sprite</plugin>
+        <plugin author="Scirra" id="Text" version="1">Text</plugin>
+    </used-plugins>
+    <used-behaviors>
+        <behavior author="Scirra" id="Bullet" version="1">Bullet</behavior>
+        <behavior author="Scirra" id="EightDir" version="1">8 Direction</behavior>
+        <behavior author="Scirra" id="Pathfinding" version="1">Pathfinding</behavior>
+        <behavior author="Scirra" id="solid" version="1">Solid</behavior>
+    </used-behaviors>
+    <used-effects />
+    <configurations>
+        <configuration exporter-descname="HTML5" exporter-id="html5" name="HTML5" />
+    </configurations>
+    <window-size>
+        <width>500</width>
+        <height>500</height>
+    </window-size>
+    <pixel-rounding>1</pixel-rounding>
+    <preview-effects>1</preview-effects>
+    <first-layout>GameScene</first-layout>
+    <use-loader-layout>0</use-loader-layout>
+    <configuration-settings>
+        <prop name="Clear background">Yes</prop>
+        <prop name="Downscaling">Medium quality</prop>
+        <prop name="Enable WebGL">On</prop>
+        <prop name="Fullscreen in browser">Letterbox scale</prop>
+        <prop name="Fullscreen scaling">High quality</prop>
+        <prop name="Loader style">Construct 2 splash</prop>
+        <prop name="Orientations">Any</prop>
+        <prop name="Pause on unfocus">No</prop>
+        <prop name="Physics engine">Box2D asm.js</prop>
+        <prop name="Preload sounds">Yes</prop>
+        <prop name="Preview browser">(default)</prop>
+        <prop name="Sampling">Linear</prop>
+        <prop name="Use high-DPI display">No</prop>
+    </configuration-settings>
+    <object-folder>
+        <object-type name="cerberusBody" sid="8687418799191948">
+            <plugin id="Sprite" />
+            <instance-variables>
+                <instance-variable name="lastposX" sid="6372947930082298" type="number" />
+                <instance-variable name="lastposY" sid="2462170400528651" type="number" />
+            </instance-variables>
+            <behaviors>
+                <behavior-type name="8Direction" sid="6331290615839406">
+                    <behavior id="EightDir" />
+                </behavior-type>
+                <behavior-type name="Solid" sid="3074390198187561">
+                    <behavior id="solid" />
+                </behavior-type>
+            </behaviors>
+            <container>
+                <type>cerberusBody</type>
+                <type>head1</type>
+                <type>head2</type>
+                <type>head3</type>
+            </container>
+            <animation-folder>
+                <animation framecount="3" loop="1" name="Default" pingpong="0" repeatcount="0" repeatto="0" sid="3405917948268887" speed="5">
+                    <frame duration="1" hotspotX="0.53125" hotspotY="0.09375" original-source="C:\Users\Leonard\Documents\Projects\ld33\hexels\dog_back_base.png">
+                        <collision-poly>
+                            <point x="0.152344" y="0" />
+                            <point x="0.880859" y="0" />
+                            <point x="0.865234" y="0.832031" />
+                            <point x="0.160156" y="0.837891" />
+                        </collision-poly>
+                    </frame>
+                    <frame duration="1" hotspotX="0.53125" hotspotY="0.09375" original-source="C:\Users\Leonard\Documents\Projects\ld33\hexels\dog_back_pas1.png">
+                        <collision-poly>
+                            <point x="0.375" y="0.375" />
+                            <point x="0.5" y="0.0625" />
+                            <point x="0.6875" y="0.3125" />
+                            <point x="0.75" y="0.5" />
+                            <point x="0.6875" y="0.6875" />
+                            <point x="0.5" y="0.78125" />
+                            <point x="0.375" y="0.625" />
+                            <point x="0.3125" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                    <frame duration="1" hotspotX="0.53125" hotspotY="0.09375" original-source="C:\Users\Leonard\Documents\Projects\ld33\hexels\dog_back_pas2.png">
+                        <collision-poly>
+                            <point x="0.375" y="0.375" />
+                            <point x="0.5" y="0.0625" />
+                            <point x="0.6875" y="0.3125" />
+                            <point x="0.75" y="0.5" />
+                            <point x="0.59375" y="0.59375" />
+                            <point x="0.5" y="0.75" />
+                            <point x="0.34375" y="0.65625" />
+                            <point x="0.3125" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="boat" sid="6438400181403714">
+            <plugin id="Sprite" />
+            <instance-variables>
+                <instance-variable name="moving" sid="6193269088370323" type="boolean" />
+            </instance-variables>
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="3653146043198041" speed="5">
+                    <frame duration="1" hotspotX="0.48913" hotspotY="0.865385" original-source="C:\Users\Leonard\Documents\Projects\ld33\hexels\boat.png">
+                        <collision-poly>
+                            <point x="0.91064" y="0.746656" />
+                            <point x="0.483069" y="1" />
+                            <point x="0.0361622" y="0.746656" />
+                            <point x="0.199206" y="0" />
+                            <point x="0.891304" y="0" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="Mouse" sid="108874275257071">
+            <plugin id="Mouse" />
+        </object-type>
+        <object-type name="head1" sid="9200262160016445">
+            <plugin id="Sprite" />
+            <instance-variables>
+                <instance-variable name="deltaX" sid="8877216608685956" type="number" />
+                <instance-variable name="deltaY" sid="3629247734834151" type="number" />
+                <instance-variable name="deltaRot" sid="4425355483934113" type="number" />
+            </instance-variables>
+            <container>
+                <type>cerberusBody</type>
+                <type>head1</type>
+                <type>head2</type>
+                <type>head3</type>
+            </container>
+            <animation-folder>
+                <animation framecount="3" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="4905014287049364" speed="5">
+                    <frame duration="1" hotspotX="1.1875" hotspotY="-0.09375" original-source="C:\Users\Leonard\Documents\Projects\ld33\hexels\dog_head_left_iddle.png" />
+                    <frame duration="1" hotspotX="1.1875" hotspotY="-0.0625" original-source="C:\Users\Leonard\Documents\Projects\ld33\hexels\dog_head_left_attack.png" />
+                    <frame duration="1" hotspotX="1.1875" hotspotY="0.0625" original-source="C:\Users\Leonard\Documents\Projects\ld33\hexels\dog_head_left_rest.png" />
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="head2" sid="4697549626907868">
+            <plugin id="Sprite" />
+            <instance-variables>
+                <instance-variable name="deltaX" sid="9170462456214486" type="number" />
+                <instance-variable name="deltaY" sid="5860210710627287" type="number" />
+                <instance-variable name="DeltaRot" sid="2299529251805024" type="number" />
+            </instance-variables>
+            <container>
+                <type>cerberusBody</type>
+                <type>head1</type>
+                <type>head2</type>
+                <type>head3</type>
+            </container>
+            <animation-folder>
+                <animation framecount="3" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="6678818739002024" speed="5">
+                    <frame duration="1" hotspotX="0" hotspotY="-0.15625" original-source="C:\Users\Leonard\Documents\Projects\ld33\hexels\dog_head_right_iddle.png" />
+                    <frame duration="1" hotspotX="0" hotspotY="-0.15625" original-source="C:\Users\Leonard\Documents\Projects\ld33\hexels\dog_head_right_attack.png" />
+                    <frame duration="1" hotspotX="0" hotspotY="-0.15625" original-source="C:\Users\Leonard\Documents\Projects\ld33\hexels\dog_head_right_rest.png" />
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="head3" sid="4766004471026097">
+            <plugin id="Sprite" />
+            <container>
+                <type>cerberusBody</type>
+                <type>head1</type>
+                <type>head2</type>
+                <type>head3</type>
+            </container>
+            <animation-folder>
+                <animation framecount="3" loop="0" name="Default" pingpong="0" repeatcount="0" repeatto="0" sid="6949514336747179" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.380952" original-source="C:\Users\Leonard\Documents\Projects\ld33\hexels\dog_head_center_iddle.png">
+                        <collision-poly>
+                            <point x="0" y="0" />
+                            <point x="0.5" y="0.238095" />
+                            <point x="1" y="0" />
+                            <point x="0.972222" y="0.5" />
+                            <point x="0.722222" y="0.761905" />
+                            <point x="0.5" y="0.809524" />
+                            <point x="0.277778" y="0.761905" />
+                            <point x="0.0277778" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.380952" original-source="C:\Users\Leonard\Documents\Projects\ld33\hexels\dog_head_center_attack.png">
+                        <collision-poly>
+                            <point x="0" y="0" />
+                            <point x="0.5" y="0.238095" />
+                            <point x="1" y="0" />
+                            <point x="0.972222" y="0.5" />
+                            <point x="0.777778" y="0.809524" />
+                            <point x="0.5" y="0.880952" />
+                            <point x="0.222222" y="0.809524" />
+                            <point x="0.0277778" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.380952" original-source="C:\Users\Leonard\Documents\Projects\ld33\hexels\dog_head_center_rest.png">
+                        <collision-poly>
+                            <point x="0.527778" y="0.452381" />
+                            <point x="0.472222" y="0.452381" />
+                            <point x="0.972222" y="0.5" />
+                            <point x="0.833333" y="0.857143" />
+                            <point x="0.5" y="1" />
+                            <point x="0.166667" y="0.857143" />
+                            <point x="0.0277778" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="soul" sid="8624303471014377">
+            <plugin id="Sprite" />
+            <instance-variables>
+                <instance-variable name="targetX" sid="2623159540339364" type="number" />
+                <instance-variable name="targetY" sid="487607671605878" type="number" />
+            </instance-variables>
+            <behaviors>
+                <behavior-type name="Pathfinding" sid="9161906832305762">
+                    <behavior id="Pathfinding" />
+                </behavior-type>
+            </behaviors>
+            <animation-folder>
+                <animation framecount="3" loop="1" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="4902869156494157" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\Leonard\Documents\Projects\ld33\hexels\ghost_iddle.png">
+                        <collision-poly>
+                            <point x="0.733333" y="0.25" />
+                            <point x="1" y="0.5" />
+                            <point x="0.666667" y="0.6875" />
+                            <point x="0.5" y="0.75" />
+                            <point x="0.233333" y="0.78125" />
+                            <point x="0.0333334" y="0.5" />
+                            <point x="0.166667" y="0.15625" />
+                        </collision-poly>
+                    </frame>
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\Leonard\Documents\Projects\ld33\hexels\ghost_step1.png">
+                        <collision-poly>
+                            <point x="0.733333" y="0.25" />
+                            <point x="1" y="0.5" />
+                            <point x="0.666667" y="0.6875" />
+                            <point x="0.5" y="0.75" />
+                            <point x="0.233333" y="0.78125" />
+                            <point x="0" y="0.5" />
+                            <point x="0.166667" y="0.15625" />
+                        </collision-poly>
+                    </frame>
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\Leonard\Documents\Projects\ld33\hexels\ghost_ste2.png">
+                        <collision-poly>
+                            <point x="0.733333" y="0.25" />
+                            <point x="1" y="0.5" />
+                            <point x="0.666667" y="0.6875" />
+                            <point x="0.5" y="0.75" />
+                            <point x="0.266667" y="0.75" />
+                            <point x="0.0333334" y="0.5" />
+                            <point x="0.233333" y="0.21875" />
+                            <point x="0.5" y="0.21875" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="ruins" sid="197834783607736">
+            <plugin id="Sprite" />
+            <behaviors>
+                <behavior-type name="Solid" sid="1232968252200508">
+                    <behavior id="solid" />
+                </behavior-type>
+            </behaviors>
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="6260147125894299" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="bridge" sid="7359380163023229">
+            <plugin id="Sprite" />
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="4364040258757286" speed="5">
+                    <frame duration="1" hotspotX="0.53125" hotspotY="0.861702" original-source="C:\Users\Leonard\Documents\Projects\ld33\hexels\bridge.png">
+                        <collision-poly>
+                            <point x="0.302083" y="0" />
+                            <point x="0.5" y="0" />
+                            <point x="0.739583" y="0.0319149" />
+                            <point x="0.822917" y="1" />
+                            <point x="0.5" y="1" />
+                            <point x="0.145833" y="1" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="Keyboard" sid="8320809882114704">
+            <plugin id="Keyboard" />
+        </object-type>
+        <object-type name="boat1spawner" sid="4668210095593168">
+            <plugin id="Sprite" />
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="3351442893251828" speed="5">
+                    <frame duration="1" hotspotX="0.584" hotspotY="0.276" />
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="ScoreText" sid="3255720904558897">
+            <plugin id="Text" />
+        </object-type>
+        <object-type name="bullet" sid="2529426943510944">
+            <plugin id="Sprite" />
+            <behaviors>
+                <behavior-type name="Bullet" sid="9057925648935028">
+                    <behavior id="Bullet" />
+                </behavior-type>
+            </behaviors>
+            <animation-folder>
+                <animation framecount="3" loop="1" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="1385024923047052" speed="3">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="Sprite" sid="2821569928226175">
+            <plugin id="Sprite" />
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="3687525554096896" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\Leonard\Documents\Projects\ld33\hexels\styx.png" />
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="hades" sid="811957107559862">
+            <plugin id="Sprite" />
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="3264803815014286" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\Leonard\Documents\Projects\ld33\hexels\hades.png">
+                        <collision-poly>
+                            <point x="0.812" y="0.466" />
+                            <point x="0.826" y="0.578" />
+                            <point x="0.76" y="0.516" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="Text" sid="9083559704265525">
+            <plugin id="Text" />
+        </object-type>
+        <object-type name="titleText" sid="8318758710780686">
+            <plugin id="Text" />
+        </object-type>
+        <object-type name="scoretxt" sid="9464483622539265">
+            <plugin id="Text" />
+        </object-type>
+        <object-type name="remainingSouls" sid="4570583329225188">
+            <plugin id="Text" />
+        </object-type>
+        <object-type name="tileBackground" sid="153754129813942">
+            <plugin id="Sprite" />
+            <animation-folder>
+                <animation framecount="21" loop="0" name="Default" pingpong="0" repeatcount="0" repeatto="0" sid="5875651588925703" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\Leonard\Documents\Projects\ld33\hexels\ground1.png">
+                        <collision-poly>
+                            <point x="0.0625" y="0.0625" />
+                            <point x="0.9375" y="0.0625" />
+                            <point x="0.96875" y="0.5" />
+                            <point x="0.9375" y="0.9375" />
+                            <point x="0.0625" y="0.9375" />
+                            <point x="0.03125" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5">
+                        <collision-poly>
+                            <point x="0.0625" y="0.0625" />
+                            <point x="0.9375" y="0.0625" />
+                            <point x="0.96875" y="0.5" />
+                            <point x="0.9375" y="0.9375" />
+                            <point x="0.0625" y="0.9375" />
+                            <point x="0.03125" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5">
+                        <collision-poly>
+                            <point x="0.0625" y="0.0625" />
+                            <point x="0.9375" y="0.0625" />
+                            <point x="0.96875" y="0.5" />
+                            <point x="0.9375" y="0.9375" />
+                            <point x="0.0625" y="0.9375" />
+                            <point x="0.03125" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5">
+                        <collision-poly>
+                            <point x="0.0625" y="0.0625" />
+                            <point x="0.9375" y="0.0625" />
+                            <point x="0.96875" y="0.5" />
+                            <point x="0.9375" y="0.9375" />
+                            <point x="0.0625" y="0.9375" />
+                            <point x="0.03125" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\Leonard\Documents\Projects\ld33\hexels\ground2.png">
+                        <collision-poly>
+                            <point x="0.0625" y="0.0625" />
+                            <point x="0.5" y="0.03125" />
+                            <point x="0.9375" y="0.0625" />
+                            <point x="0.90625" y="0.5" />
+                            <point x="0.9375" y="0.9375" />
+                            <point x="0.5" y="0.96875" />
+                            <point x="0.0625" y="0.9375" />
+                            <point x="0.03125" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\Leonard\Documents\Projects\ld33\hexels\ground3.png">
+                        <collision-poly>
+                            <point x="0.09375" y="0.09375" />
+                            <point x="0.5" y="0.03125" />
+                            <point x="0.9375" y="0.0625" />
+                            <point x="0.78125" y="0.5" />
+                            <point x="0.9375" y="0.9375" />
+                            <point x="0.5" y="0.96875" />
+                            <point x="0.0625" y="0.9375" />
+                            <point x="0.03125" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5">
+                        <collision-poly>
+                            <point x="0.09375" y="0.09375" />
+                            <point x="0.5" y="0.03125" />
+                            <point x="0.9375" y="0.0625" />
+                            <point x="0.78125" y="0.5" />
+                            <point x="0.9375" y="0.9375" />
+                            <point x="0.5" y="0.96875" />
+                            <point x="0.0625" y="0.9375" />
+                            <point x="0.03125" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\Leonard\Documents\Projects\ld33\hexels\ground4.png">
+                        <collision-poly>
+                            <point x="0.0625" y="0.0625" />
+                            <point x="0.5" y="0.03125" />
+                            <point x="0.9375" y="0.0625" />
+                            <point x="0.96875" y="0.5" />
+                            <point x="0.90625" y="0.90625" />
+                            <point x="0.5" y="0.96875" />
+                            <point x="0.0625" y="0.9375" />
+                            <point x="0.03125" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\Leonard\Documents\Projects\ld33\hexels\ground5.png">
+                        <collision-poly>
+                            <point x="0.09375" y="0.09375" />
+                            <point x="0.5" y="0.0625" />
+                            <point x="0.9375" y="0.0625" />
+                            <point x="0.9375" y="0.5" />
+                            <point x="0.90625" y="0.90625" />
+                            <point x="0.5" y="0.96875" />
+                            <point x="0.0625" y="0.9375" />
+                            <point x="0.03125" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5">
+                        <collision-poly>
+                            <point x="0.09375" y="0.09375" />
+                            <point x="0.5" y="0.0625" />
+                            <point x="0.9375" y="0.0625" />
+                            <point x="0.9375" y="0.5" />
+                            <point x="0.90625" y="0.90625" />
+                            <point x="0.5" y="0.96875" />
+                            <point x="0.0625" y="0.9375" />
+                            <point x="0.03125" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5">
+                        <collision-poly>
+                            <point x="0.09375" y="0.09375" />
+                            <point x="0.5" y="0.0625" />
+                            <point x="0.9375" y="0.0625" />
+                            <point x="0.9375" y="0.5" />
+                            <point x="0.90625" y="0.90625" />
+                            <point x="0.5" y="0.96875" />
+                            <point x="0.0625" y="0.9375" />
+                            <point x="0.03125" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5">
+                        <collision-poly>
+                            <point x="0.09375" y="0.09375" />
+                            <point x="0.5" y="0.0625" />
+                            <point x="0.9375" y="0.0625" />
+                            <point x="0.9375" y="0.5" />
+                            <point x="0.90625" y="0.90625" />
+                            <point x="0.5" y="0.96875" />
+                            <point x="0.0625" y="0.9375" />
+                            <point x="0.03125" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5">
+                        <collision-poly>
+                            <point x="0.09375" y="0.09375" />
+                            <point x="0.5" y="0.0625" />
+                            <point x="0.9375" y="0.0625" />
+                            <point x="0.9375" y="0.5" />
+                            <point x="0.90625" y="0.90625" />
+                            <point x="0.5" y="0.96875" />
+                            <point x="0.0625" y="0.9375" />
+                            <point x="0.03125" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5">
+                        <collision-poly>
+                            <point x="0.09375" y="0.09375" />
+                            <point x="0.5" y="0.0625" />
+                            <point x="0.9375" y="0.0625" />
+                            <point x="0.9375" y="0.5" />
+                            <point x="0.90625" y="0.90625" />
+                            <point x="0.5" y="0.96875" />
+                            <point x="0.0625" y="0.9375" />
+                            <point x="0.03125" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5">
+                        <collision-poly>
+                            <point x="0.09375" y="0.09375" />
+                            <point x="0.5" y="0.0625" />
+                            <point x="0.9375" y="0.0625" />
+                            <point x="0.9375" y="0.5" />
+                            <point x="0.90625" y="0.90625" />
+                            <point x="0.5" y="0.96875" />
+                            <point x="0.0625" y="0.9375" />
+                            <point x="0.03125" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5">
+                        <collision-poly>
+                            <point x="0.09375" y="0.09375" />
+                            <point x="0.5" y="0.0625" />
+                            <point x="0.9375" y="0.0625" />
+                            <point x="0.9375" y="0.5" />
+                            <point x="0.90625" y="0.90625" />
+                            <point x="0.5" y="0.96875" />
+                            <point x="0.0625" y="0.9375" />
+                            <point x="0.03125" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\Leonard\Documents\Projects\ld33\hexels\ground6.png">
+                        <collision-poly>
+                            <point x="0.09375" y="0.09375" />
+                            <point x="0.5" y="0.0625" />
+                            <point x="0.9375" y="0.0625" />
+                            <point x="0.9375" y="0.5" />
+                            <point x="0.90625" y="0.90625" />
+                            <point x="0.5" y="0.96875" />
+                            <point x="0.0625" y="0.9375" />
+                            <point x="0.03125" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5">
+                        <collision-poly>
+                            <point x="0.09375" y="0.09375" />
+                            <point x="0.5" y="0.0625" />
+                            <point x="0.9375" y="0.0625" />
+                            <point x="0.9375" y="0.5" />
+                            <point x="0.90625" y="0.90625" />
+                            <point x="0.5" y="0.96875" />
+                            <point x="0.0625" y="0.9375" />
+                            <point x="0.03125" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5">
+                        <collision-poly>
+                            <point x="0.09375" y="0.09375" />
+                            <point x="0.5" y="0.0625" />
+                            <point x="0.9375" y="0.0625" />
+                            <point x="0.9375" y="0.5" />
+                            <point x="0.90625" y="0.90625" />
+                            <point x="0.5" y="0.96875" />
+                            <point x="0.0625" y="0.9375" />
+                            <point x="0.03125" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\Leonard\Documents\Projects\ld33\hexels\ground7.png">
+                        <collision-poly>
+                            <point x="0.09375" y="0.09375" />
+                            <point x="0.5" y="0.03125" />
+                            <point x="0.9375" y="0.0625" />
+                            <point x="0.96875" y="0.5" />
+                            <point x="0.9375" y="0.9375" />
+                            <point x="0.5" y="0.96875" />
+                            <point x="0.0625" y="0.9375" />
+                            <point x="0.03125" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\Leonard\Documents\Projects\ld33\hexels\ground8.png">
+                        <collision-poly>
+                            <point x="0.09375" y="0.09375" />
+                            <point x="0.5" y="0.03125" />
+                            <point x="0.9375" y="0.0625" />
+                            <point x="0.96875" y="0.5" />
+                            <point x="0.90625" y="0.90625" />
+                            <point x="0.5" y="0.96875" />
+                            <point x="0.0625" y="0.9375" />
+                            <point x="0.03125" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="audiocontroller" sid="7107438910543266">
+            <plugin id="Audio" />
+        </object-type>
+        <object-type name="Sprite2" sid="9946149451747147">
+            <plugin id="Sprite" />
+            <animation-folder>
+                <animation framecount="2" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="2212204917218075" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="Sprite3" sid="6412726025420179">
+            <plugin id="Sprite" />
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="3835465763460551" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" />
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="Sprite4" sid="4114798153202754">
+            <plugin id="Sprite" />
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="3561604645208058" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\Leonard\Documents\Projects\ld33\hexels\ending.png">
+                        <collision-poly>
+                            <point x="0.108" y="0.108" />
+                            <point x="0.5" y="0.188" />
+                            <point x="0.876" y="0.124" />
+                            <point x="0.984" y="0.984" />
+                            <point x="0.504" y="0.702" />
+                            <point x="0.5" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+        <object-type name="rock" sid="1945646044760369">
+            <plugin id="Sprite" />
+            <animation-folder>
+                <animation framecount="1" loop="0" name="Default" pingpong="0" repeatcount="1" repeatto="0" sid="4002227573170101" speed="5">
+                    <frame duration="1" hotspotX="0.5" hotspotY="0.5" original-source="C:\Users\Leonard\Documents\Projects\ld33\hexels\rock.png">
+                        <collision-poly>
+                            <point x="0.1875" y="0.1875" />
+                            <point x="0.5" y="0.0625" />
+                            <point x="0.84375" y="0.15625" />
+                            <point x="0.96875" y="0.5" />
+                            <point x="0.875" y="0.875" />
+                            <point x="0.5" y="0.9375" />
+                            <point x="0.1875" y="0.8125" />
+                            <point x="0.125" y="0.5" />
+                        </collision-poly>
+                    </frame>
+                </animation>
+            </animation-folder>
+        </object-type>
+    </object-folder>
+    <families />
+    <layout-folder>
+        <layout>GameScene.xml</layout>
+        <layout>Ending.xml</layout>
+        <layout>StartScreen.xml</layout>
+    </layout-folder>
+    <event-folder>
+        <event-sheet>gameSceneSource.xml</event-sheet>
+        <event-sheet>endingSource.xml</event-sheet>
+        <event-sheet>StartScreenSource.xml</event-sheet>
+    </event-folder>
+    <global-instances>
+        <global-instance type="Mouse" uid="2" />
+        <global-instance type="Keyboard" uid="13" />
+        <global-instance type="audiocontroller" uid="31">
+            <properties>
+                <timescale-audio>Off</timescale-audio>
+                <saveload>All</saveload>
+                <play-in-background>No</play-in-background>
+                <positioned-audio></positioned-audio>
+                <panning-model>HRTF</panning-model>
+                <distance-model>Inverse</distance-model>
+                <listener-z-height>600</listener-z-height>
+                <reference-distance>600</reference-distance>
+                <maximum-distance>10000</maximum-distance>
+                <roll-off-factor>1</roll-off-factor>
+            </properties>
+        </global-instance>
+    </global-instances>
+    <sounds-folder>
+        <file name="click.m4a" />
+        <file name="click.ogg" />
+        <file name="explosion.m4a" />
+        <file name="explosion.ogg" />
+        <file name="bite1.m4a" />
+        <file name="bite1.ogg" />
+        <file name="soulwin.m4a" />
+        <file name="soulwin.ogg" />
+        <file name="winjingle.m4a" />
+        <file name="winjingle.ogg" />
+    </sounds-folder>
+    <music-folder />
+    <files-folder>
+        <file-folder name="Icons">
+            <file name="icon-16.png" />
+            <file name="icon-32.png" />
+            <file name="icon-114.png" />
+            <file name="icon-128.png" />
+            <file name="icon-256.png" />
+            <file name="loading-logo.png" />
+        </file-folder>
+    </files-folder>
+</c2project>
